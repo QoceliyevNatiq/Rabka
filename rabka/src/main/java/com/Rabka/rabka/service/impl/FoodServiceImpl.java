@@ -30,10 +30,9 @@ public class FoodServiceImpl implements FoodService {
         log.debug("createFood started | Category id; {} | FoodName; {}",food.CategoryId(),food.name());
         if (food.CategoryId() == null) {
             log.error("createFood food CategoryId is null");
-            throw new ResourceNotFoundException("createFood","CategoryId", food.CategoryId());
+            throw new ResourceNotFoundException("createFood","CategoryId", food.categoryId());
         }
-        Food foodEntity = new Food();
-        userMapper.createDtoToFood(food);
+        Food foodEntity = userMapper.createDtoToFood(food);
         foodRepository.save(foodEntity);
         return userMapper.foodToFoodResponseDto(foodEntity);
 
@@ -41,22 +40,60 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public FoodResponseDto updateFood(FoodUpdateDto foodUpdateDto) {
+        log.debug("updateFood started | Category id; {} | Food name: {}",foodUpdateDto.CategoryId(),foodUpdateDto.name());
+        if (foodUpdateDto.CategoryId() == null) {
+            log.error("updateFood food CategoryId is null");
+            throw new ResourceNotFoundException("updateFood","CategoryId", foodUpdateDto.CategoryId());
+        }
+
         return null;
     }
-
+    @Transactional
     @Override
     public void deleteFood(Long foodId) {
-
+        log.debug("deleteFood started | Category id; {}",foodId);
+        if (foodId == null) {
+            log.error("deleteFood food foodId is null");
+            throw new ResourceNotFoundException("deleteFood","foodId", foodId);
+        }
+        foodRepository.deleteById(foodId);
+        log.debug("deleteFood successfully ended foodId {}",foodId);
     }
 
     @Override
-    public FoodResponseDto getFood(Long foodId) {
-        return null;
+    @Transactional
+    public void setActive(Long foodId, Boolean active) {
+        log.debug("setActive started | Food id; {}",foodId);
+        Food food = foodRepository.findById(foodId)
+
+                .orElseThrow(() -> {log.error("setActive food food foodId {} not found",foodId);
+                    return new ResourceNotFoundException("food", "foodId", foodId);
+                });
+        food.setIsActive(active);
+        foodRepository.save(food);
+        log.debug("setActive successfully ended foodId {}",foodId);
+    }
+
+    @Override
+    public FoodResponseDto getFoodById(Long foodId) {
+        log.debug("getFoodById started | Food id; {}",foodId);
+        Food food = foodRepository.findById(foodId)
+                .orElseThrow(() -> {
+                    log.error("getFoodById food foodId {} not found",foodId);
+                    return new ResourceNotFoundException("food", "foodId", foodId);
+                });
+        log.debug("getFoodById successfully ended foodId {}",foodId);
+        return userMapper.foodToFoodResponseDto(food);
+
     }
 
     @Override
     public Page<FoodResponseDto> findFoodByNameContainingIgnoreCase(String foodName, Pageable pageable) {
-        return null;
+        log.debug("findFoodByNameContainingIgnoreCase started | foodName; {}",foodName);
+        Page<FoodResponseDto> foods = foodRepository.findFoodByNameContainingIgnoreCase(foodName,pageable)
+                .map(userMapper::foodToFoodResponseDto);
+        log.debug("findFoodByNameContainingIgnoreCase successfully ended | foodList: {}",foods.getTotalElements());
+        return foods;
     }
 
     @Override

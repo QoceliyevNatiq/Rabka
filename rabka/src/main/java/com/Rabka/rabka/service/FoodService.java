@@ -15,7 +15,8 @@ public interface FoodService {
     FoodResponseDto createFood(FoodCreateDto food);
     FoodResponseDto updateFood(FoodUpdateDto foodUpdateDto);
     void  deleteFood(Long foodId);
-    FoodResponseDto getFood(Long foodId);
+    void setActive(Long foodId,Boolean active);
+    FoodResponseDto getFoodById(Long foodId);
     Page<FoodResponseDto> findFoodByNameContainingIgnoreCase(String foodName,Pageable pageable);
     Page<FoodResponseDto> findFoodByCategoryId(Long foodCategoryId, Pageable pageable);
     Page<FoodResponseDto> findFoodByCategoryName(String foodCategoryName, Pageable pageable);

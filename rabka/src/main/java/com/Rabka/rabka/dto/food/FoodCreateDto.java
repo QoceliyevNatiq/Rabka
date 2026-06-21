@@ -27,6 +27,6 @@ public record FoodCreateDto(
         String imageUrl,
 
         @NotNull(message = "food should belong to category")
-        Long CategoryId
+        Long categoryId
 ) {
 }
