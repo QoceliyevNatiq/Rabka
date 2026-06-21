@@ -37,4 +37,7 @@ public class Food {
     @ManyToOne(fetch = FetchType.LAZY)
     private MenuCategory menuCategory;
 
+    @Column(nullable = false)
+    private Boolean isActive;
+
 }
