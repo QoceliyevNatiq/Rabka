@@ -25,6 +25,7 @@ public class WorkingHours {
     private LocalTime openingTime;
     private LocalTime closingTime;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 }

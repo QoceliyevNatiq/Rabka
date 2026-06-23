@@ -1,5 +1,6 @@
 package com.Rabka.rabka.service.impl;
 
+import com.Rabka.rabka.exception.ResourceNotFoundException;
 import com.Rabka.rabka.mapstruct.RestaurantMapper;
 import com.Rabka.rabka.mapstruct.UserMapper;
 import com.Rabka.rabka.dto.Restauran.RestaurantCreateDto;
@@ -40,8 +41,26 @@ public class RestaurantServiceImpl implements RestaurantService {
         log.debug("updateRestaurant - start | RestaurantId: {}", updateDto.id());
         Restaurant restaurant = restaurantRepository.findById(updateDto.id())
                 .orElseThrow(() -> {
-                    log.warn("")
-                }
+                    log.warn("deleteRestaurant - Restaurant not found with id: {}", updateDto.id());
+                    return new ResourceNotFoundException("updateRestaurant","restaurantId", updateDto.id());
+                });
+        if(updateDto.logoUrl() != null) {
+            restaurant.setLogoUrl(updateDto.logoUrl());
+        }
+        if(updateDto.name() != null) {
+            restaurant.setName(updateDto.name());
+        }
+        if(updateDto.description() != null) {
+            restaurant.setDescription(updateDto.description());
+        }
+        if(updateDto.type() != null) {
+            restaurant.setType(updateDto.type());
+        }
+        if(updateDto.isActive() != null) {
+            restaurant.setIsActive(updateDto.isActive());
+        }
+        log.info("updateRestaurant - end | Restaurant id: {}",restaurant.getId());
+        return  mapper.restaurantToRestaurantDto(restaurantRepository.save(restaurant));
     }
 
     @Override

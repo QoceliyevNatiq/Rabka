@@ -43,8 +43,7 @@ public class Restaurant {
     @Column(nullable = true)
     private RestaurantType type;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "working_hours_id")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "restaurant")
     private WorkingHours workingHours;
 
 }
