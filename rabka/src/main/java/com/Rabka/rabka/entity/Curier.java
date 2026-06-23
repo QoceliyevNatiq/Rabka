@@ -21,7 +21,7 @@ public class Curier {
     @Column(nullable = false,length = 20)
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, )
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Order order;
 
 }

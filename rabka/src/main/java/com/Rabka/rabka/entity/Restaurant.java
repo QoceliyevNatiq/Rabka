@@ -39,4 +39,12 @@ public class Restaurant {
     @Column(nullable = true)
     private RestaurantStatus status;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = true)
+    private RestaurantType type;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "working_hours_id")
+    private WorkingHours workingHours;
+
 }

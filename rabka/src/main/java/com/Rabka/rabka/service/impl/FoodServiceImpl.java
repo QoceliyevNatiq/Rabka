@@ -1,6 +1,6 @@
 package com.Rabka.rabka.service.impl;
 
-import com.Rabka.rabka.config.UserMapper;
+import com.Rabka.rabka.mapstruct.UserMapper;
 import com.Rabka.rabka.dto.food.FoodCreateDto;
 import com.Rabka.rabka.dto.food.FoodResponseDto;
 import com.Rabka.rabka.dto.food.FoodUpdateDto;

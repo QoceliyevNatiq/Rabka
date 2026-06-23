@@ -1,4 +1,4 @@
-package com.Rabka.rabka.config;
+package com.Rabka.rabka.mapstruct;
 
 import com.Rabka.rabka.dto.RegisterDto;
 import com.Rabka.rabka.dto.food.FoodCreateDto;
