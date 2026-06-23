@@ -34,10 +34,11 @@ public class Food {
     @Column(nullable = false,length = 10)
     private String portion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private MenuCategory menuCategory;
 
     @Column(nullable = false)
     private Boolean isActive;
+
+    @Column(nullable = false)
+    private Long categoryId;
 
 }

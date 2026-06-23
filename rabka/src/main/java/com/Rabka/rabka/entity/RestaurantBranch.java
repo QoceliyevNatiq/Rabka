@@ -19,11 +19,7 @@ public class RestaurantBranch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, columnDefinition = "DECIMAL(10,8)")
-    private Double latitude;
-
-    @Column(nullable = false, columnDefinition = "DECIMAL(11,8)")
-    private Double longitude;
+    private  Location location;
 
     @Column(nullable = false, length = 255)
     private String address;

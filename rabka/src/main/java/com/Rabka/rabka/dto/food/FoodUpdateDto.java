@@ -7,7 +7,8 @@ import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 
 public record FoodUpdateDto(
-
+        @NotNull
+        Long id,
         @Size(max = 20)
         String name,
 

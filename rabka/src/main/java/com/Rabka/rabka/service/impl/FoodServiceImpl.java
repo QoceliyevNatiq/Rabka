@@ -5,10 +5,11 @@ import com.Rabka.rabka.dto.food.FoodCreateDto;
 import com.Rabka.rabka.dto.food.FoodResponseDto;
 import com.Rabka.rabka.dto.food.FoodUpdateDto;
 import com.Rabka.rabka.entity.Food;
+import com.Rabka.rabka.entity.MenuCategory;
 import com.Rabka.rabka.exception.ResourceNotFoundException;
 import com.Rabka.rabka.repo.FoodRepository;
+import com.Rabka.rabka.repo.MenuCategoryRepository;
 import com.Rabka.rabka.service.FoodService;
-import jakarta.transaction.RollbackException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,16 +23,18 @@ import org.springframework.stereotype.Service;
 public class FoodServiceImpl implements FoodService {
     private final FoodRepository foodRepository;
     private final UserMapper userMapper;
+    private final MenuCategoryRepository categoryRepository;
 
 
     @Transactional
     @Override
     public FoodResponseDto createFood(FoodCreateDto food) {
         log.debug("createFood started | Category id; {} | FoodName; {}",food.categoryId(),food.name());
-        if (food.categoryId() == null) {
+        MenuCategory category = categoryRepository.findById(food.categoryId())
+                        .orElseThrow(() -> {
             log.warn("createFood food CategoryId is null");
-            throw new ResourceNotFoundException("createFood","CategoryId", food.categoryId());
-        }
+            return new ResourceNotFoundException("createFood","CategoryId", food.categoryId());
+        });
         Food foodEntity = userMapper.createDtoToFood(food);
         foodRepository.save(foodEntity);
         log.info("createFood finished | Food id {}", foodEntity.getId());
@@ -42,12 +45,36 @@ public class FoodServiceImpl implements FoodService {
     @Override
     public FoodResponseDto updateFood(FoodUpdateDto foodUpdateDto) {
         log.debug("updateFood started | Category id; {} | Food name: {}",foodUpdateDto.CategoryId(),foodUpdateDto.name());
-        if (foodUpdateDto.CategoryId() == null) {
+        Food food =  foodRepository.findById(foodUpdateDto.id())
+                        .orElseThrow(() -> {
             log.warn("updateFood food CategoryId is null");
-            throw new ResourceNotFoundException("updateFood","CategoryId", foodUpdateDto.CategoryId());
+            return new ResourceNotFoundException("updateFood","FoodId", null);
+        });
+        if(foodUpdateDto.name() != null) {
+            food.setName(foodUpdateDto.name());
         }
+        if(foodUpdateDto.description() != null) {
+            food.setDescription(foodUpdateDto.description());
+        }
+        if(foodUpdateDto.price() != null) {
+            food.setPrice(foodUpdateDto.price());
+        }
+        if(foodUpdateDto.portion() != null) {
+            food.setPortion(foodUpdateDto.portion());
+        }
+        if(foodUpdateDto.imageUrl() != null) {
+            food.setImageUrl(foodUpdateDto.imageUrl());
+        }
+        if(foodUpdateDto.CategoryId() != null) {
+            food.setCategoryId(foodUpdateDto.CategoryId());
+        }
+        if(foodUpdateDto.isActive()!=null) {
+            food.setIsActive(foodUpdateDto.isActive());
+        }
+        log.info("updateFood finished | Food id {}", food.getId());
+        return userMapper.foodToFoodResponseDto(foodRepository.save(food));
 
-        return null;
+
     }
     @Transactional
     @Override
