@@ -74,7 +74,7 @@ public class RestaurantServiceImpl implements RestaurantService {
                     return new ResourceNotFoundException("getRestaurant","restaurantId", id);
                 });
         RestaurantResponseDto responseDto = mapper.restaurantToRestaurantDto(restaurant);
-
+        return null;
     }
 
     @Override
