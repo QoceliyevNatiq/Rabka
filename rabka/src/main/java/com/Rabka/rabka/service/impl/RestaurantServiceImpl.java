@@ -74,32 +74,55 @@ public class RestaurantServiceImpl implements RestaurantService {
                     return new ResourceNotFoundException("getRestaurant","restaurantId", id);
                 });
         RestaurantResponseDto responseDto = mapper.restaurantToRestaurantDto(restaurant);
-        return null;
+        log.info("getRestaurant - end | Restaurant id: {}",restaurant.getId());
+        return responseDto;
     }
 
     @Override
     public void deleteRestaurantById(Long id) {
-
+        log.debug("deleteRestaurant - start | Restaurant id: {}", id);
+        if (!restaurantRepository.existsById(id)) {
+            log.warn("deleteRestaurant - Restaurant not found with id: {}", id);
+            throw new ResourceNotFoundException("deleteRestaurant","restaurantId", id);
+        }
+        restaurantRepository.deleteById(id);
+        log.info("deleteRestaurant - end | Restaurant id: {}",id);
     }
 
     @Override
     public Page<RestaurantResponseDto> getAllRestaurantsIsActive(Pageable pageable) {
-        return null;
+        log.debug("getAllRestaurantsIsActive - start");
+        Page<RestaurantResponseDto> restaurants = restaurantRepository.findAllIsActive(pageable)
+                .map(mapper::restaurantToRestaurantDto);
+        log.info("getAllRestaurantsIsActive - end | Restaurants: {}",restaurants.getTotalElements());
+        return restaurants;
     }
 
     @Override
     public Page<RestaurantResponseDto> getAllRestaurants(Pageable pageable) {
-        return null;
+        log.debug("getAllRestaurants - start");
+        Page<RestaurantResponseDto> restaurants = restaurantRepository.findAll(pageable)
+                .map(mapper::restaurantToRestaurantDto);
+        log.info("getAllRestaurants - end | Restaurants: {}",restaurants.getTotalElements());
+        return restaurants;
     }
 
     @Override
     public Page<RestaurantResponseDto> findRestaurantsByType(RestaurantType type, Pageable pageable) {
-        return null;
+        log.debug("findRestaurantsByType - start | type: {}",type);
+        Page<RestaurantResponseDto>  restaurants = restaurantRepository.findRestaurantByType(type, pageable)
+                .map(mapper::restaurantToRestaurantDto);
+        log.info("findRestaurantsByType - end | type: {}, Restaurants: {}",type,restaurants.getTotalElements());
+        return restaurants;
     }
 
     @Override
     public Page<RestaurantResponseDto> findRestaurantsByNameContainingIgnoreCase(String name, Pageable pageable) {
-        return null;
+        log.debug("findRestaurantsByNameContainingIgnoreCase - start | name: {}",name);
+        Page<RestaurantResponseDto> restaurants = restaurantRepository.findRestaurantsByNameContainingIgnoreCase(name,pageable)
+                .map(mapper::restaurantToRestaurantDto);
+        log.info("findRestaurantsByNameContainingIgnoreCase - end | name: {}, Restaurants: {}",name, restaurants.getTotalElements());
+        return restaurants;
     }
 
     @Override
@@ -109,6 +132,14 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public RestaurantResponseDto updateRestaurantStatus(Long id, RestaurantStatus status) {
-        return null;
+        log.debug("updateRestaurantStatus - start | id: {}, status: {}",id,status);
+        Restaurant restaurant = restaurantRepository.findById(id)
+                .orElseThrow(() -> {
+                    log.warn("updateRestaurantStatus - Restaurant not found with id: {}", id);
+                    return new ResourceNotFoundException("updateRestaurant","restaurantId", id);
+                });
+        restaurant.setStatus(status);
+        restaurantRepository.save(restaurant);
+        return mapper.restaurantToRestaurantDto(restaurant);
     }
 }
