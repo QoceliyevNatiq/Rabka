@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.core.support.RepositoryMethodInvocationListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class RestaurantServiceImpl implements RestaurantService {
     private final RestaurantRepository restaurantRepository;
     private final RestaurantMapper mapper;
+    private final RepositoryMethodInvocationListener repositoryMethodInvocationListener;
 
 
     @Override
@@ -65,7 +67,14 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public RestaurantResponseDto getRestaurantById(Long id) {
-        return null;
+        log.debug("getRestaurant - start | Restaurant id: {}", id);
+        Restaurant restaurant = restaurantRepository.findById(id)
+                .orElseThrow(() -> {
+                    log.warn("getRestaurant - Restaurant not found with id: {}", id);
+                    return new ResourceNotFoundException("getRestaurant","restaurantId", id);
+                });
+        RestaurantResponseDto responseDto = mapper.restaurantToRestaurantDto(restaurant);
+
     }
 
     @Override
