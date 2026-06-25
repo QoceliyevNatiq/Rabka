@@ -15,7 +15,8 @@ public record RestaurantResponseDto(
         RestaurantMenu menu,
         Boolean active,
         RestaurantType type,
-        WorkingHours workingHours
+        List<WorkingHours> workingHours
+        //change the entities with dtos
 
 
 ) {

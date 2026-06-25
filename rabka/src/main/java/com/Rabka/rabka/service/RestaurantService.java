@@ -21,7 +21,7 @@ public interface RestaurantService {
     Page<RestaurantResponseDto> getAllRestaurants(Pageable pageable);
     Page<RestaurantResponseDto> findRestaurantsByType(RestaurantType type, Pageable pageable);
     Page<RestaurantResponseDto> findRestaurantsByNameContainingIgnoreCase(String name, Pageable pageable);
-    Page<RestaurantResponseDto> findRestaurantsIsNotClosed(Pageable pageable);
+    Page<RestaurantResponseDto> findRestaurantsIsNotClosed(Pageable pageable, Time now);
     RestaurantResponseDto updateRestaurantStatus(Long id, RestaurantStatus status);
 
 

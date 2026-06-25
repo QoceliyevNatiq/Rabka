@@ -2,7 +2,12 @@ package com.Rabka.rabka.service.impl;
 
 import com.Rabka.rabka.exception.ResourceNotFoundException;
 import com.Rabka.rabka.mapstruct.RestaurantMapper;
+
+import java.sql.Time;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
+
 import com.Rabka.rabka.dto.Restauran.RestaurantCreateDto;
 import com.Rabka.rabka.dto.Restauran.RestaurantResponseDto;
 import com.Rabka.rabka.dto.Restauran.RestaurantUpdateDto;
@@ -15,7 +20,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.core.support.RepositoryMethodInvocationListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class RestaurantServiceImpl implements RestaurantService {
     private final RestaurantRepository restaurantRepository;
     private final RestaurantMapper mapper;
-    private final RepositoryMethodInvocationListener repositoryMethodInvocationListener;
+
 
 
     @Override
@@ -92,7 +96,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Page<RestaurantResponseDto> getAllRestaurantsIsActive(Pageable pageable) {
         log.debug("getAllRestaurantsIsActive - start");
-        Page<RestaurantResponseDto> restaurants = restaurantRepository.findAllIsActive(pageable)
+        Page<RestaurantResponseDto> restaurants = restaurantRepository.findByIsActiveTrue(pageable)
                 .map(mapper::restaurantToRestaurantDto);
         log.info("getAllRestaurantsIsActive - end | Restaurants: {}",restaurants.getTotalElements());
         return restaurants;
@@ -126,9 +130,14 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Page<RestaurantResponseDto> findRestaurantsIsNotClosed(Pageable pageable,) {
+    public Page<RestaurantResponseDto> findRestaurantsIsNotClosed(Pageable pageable, Time now) {
         log.debug("findRestaurantsIsNotClosed - start");
-        Page<Restaurant> restaurants = restaurantRepository.findOpenRestaurantsNow(pageable,);
+        DayOfWeek day = LocalDate.now().getDayOfWeek();
+        LocalTime currentTime = now.toLocalTime();
+        Page<RestaurantResponseDto> restaurants = restaurantRepository.findOpenRestaurantsNow(day, currentTime, pageable)
+                        .map(mapper::restaurantToRestaurantDto);
+        log.info("findRestaurantsIsNotClosed - end | restaurants: {}",restaurants);
+        return  restaurants;
     }
 
     @Override

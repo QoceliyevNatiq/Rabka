@@ -44,6 +44,6 @@ public class Restaurant {
     private RestaurantType type;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "restaurant")
-    private WorkingHours workingHours;
+    private List<WorkingHours> workingHours;
 
 }
