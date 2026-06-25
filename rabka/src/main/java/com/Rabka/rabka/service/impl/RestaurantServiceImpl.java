@@ -2,7 +2,7 @@ package com.Rabka.rabka.service.impl;
 
 import com.Rabka.rabka.exception.ResourceNotFoundException;
 import com.Rabka.rabka.mapstruct.RestaurantMapper;
-import com.Rabka.rabka.mapstruct.UserMapper;
+import java.time.LocalDate;
 import com.Rabka.rabka.dto.Restauran.RestaurantCreateDto;
 import com.Rabka.rabka.dto.Restauran.RestaurantResponseDto;
 import com.Rabka.rabka.dto.Restauran.RestaurantUpdateDto;
@@ -126,8 +126,9 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Page<RestaurantResponseDto> findRestaurantsIsClosed(Pageable pageable) {
-        return null;
+    public Page<RestaurantResponseDto> findRestaurantsIsNotClosed(Pageable pageable,) {
+        log.debug("findRestaurantsIsNotClosed - start");
+        Page<Restaurant> restaurants = restaurantRepository.findOpenRestaurantsNow(pageable,);
     }
 
     @Override

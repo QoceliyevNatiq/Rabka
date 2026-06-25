@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+
 @Service
 public interface RestaurantService {
     RestaurantResponseDto createRestaurant(RestaurantCreateDto createDto);
@@ -19,7 +21,7 @@ public interface RestaurantService {
     Page<RestaurantResponseDto> getAllRestaurants(Pageable pageable);
     Page<RestaurantResponseDto> findRestaurantsByType(RestaurantType type, Pageable pageable);
     Page<RestaurantResponseDto> findRestaurantsByNameContainingIgnoreCase(String name, Pageable pageable);
-    Page<RestaurantResponseDto> findRestaurantsIsClosed(Pageable pageable);
+    Page<RestaurantResponseDto> findRestaurantsIsNotClosed(Pageable pageable);
     RestaurantResponseDto updateRestaurantStatus(Long id, RestaurantStatus status);
 
 
