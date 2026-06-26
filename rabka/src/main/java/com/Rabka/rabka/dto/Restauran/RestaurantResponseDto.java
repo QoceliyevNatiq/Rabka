@@ -8,14 +8,15 @@ import com.Rabka.rabka.entity.WorkingHours;
 import java.util.List;
 
 public record RestaurantResponseDto(
+        Long id,
         String name,
         List<RestaurantBranch> branches,
         String logoUrl,
         String description,
         RestaurantMenu menu,
         Boolean active,
-        RestaurantType type,
-        List<WorkingHours> workingHours
+        RestaurantType type
+//        List<WorkingHours> workingHours
         //change the entities with dtos
 
 
