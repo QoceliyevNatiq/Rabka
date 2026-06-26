@@ -4,7 +4,7 @@ import java.time.LocalTime;
 
 public record WorkingHoursResponseDto(
         Long id,
-        Long restaurantId,
+        Long restaurantBranchId,
         LocalTime openingTime,
         LocalTime closingTime
 ) {

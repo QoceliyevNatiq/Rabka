@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.List;
+
 
 @Getter @Setter
 @AllArgsConstructor
@@ -32,6 +34,11 @@ public class RestaurantBranch {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
+
+    private Boolean isActive;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "restaurant")
+    private List<WorkingHours> workingHours;
 
 
 }

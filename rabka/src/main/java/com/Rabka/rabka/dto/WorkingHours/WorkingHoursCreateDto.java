@@ -7,7 +7,7 @@ import java.time.LocalTime;
 
 public record WorkingHoursCreateDto(
         @NotNull(message = "this part can't be empty")
-        Long restaurantId,
+        Long restaurantBranchId,
 
         @NotNull(message = "this part can't be empty")
         LocalTime openingTime,
