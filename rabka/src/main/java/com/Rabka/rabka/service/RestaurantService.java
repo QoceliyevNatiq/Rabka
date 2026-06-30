@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Time;
 
-@Service
+
 public interface RestaurantService {
     RestaurantResponseDto createRestaurant(RestaurantCreateDto createDto);
     RestaurantResponseDto updateRestaurant(RestaurantUpdateDto updateDto);
