@@ -21,16 +21,8 @@ public class UserServiceImpl implements UserService {
     public void register(RegisterDto register) {
         log.debug("Register User started: {}", register);
         if(userRepository.findByEmail(register.email()).isPresent()){
-            log.error("user is already exist {}",register.email());
             throw new RuntimeException();
-
         }
-        User user = new User();
         userRepository.save(userMapper.registerDtoToUser(register));
-//        user = userMapper.registerDtoToUser(register);
-
-        log.debug("Register end");
-
-
     }
 }

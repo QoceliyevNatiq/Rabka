@@ -32,11 +32,7 @@ public class WorkingHoursServiceImpl implements WorkingHoursService {
     public WorkingHoursResponseDto createWorkingHours(WorkingHoursCreateDto workingHoursCreateDto) {
         log.debug("createWorkingHours start | restaurantBranchId: {}",workingHoursCreateDto.restaurantBranchId());
         RestaurantBranch branch = restaurantBranchRepository.findById(workingHoursCreateDto.restaurantBranchId())
-                .orElseThrow(() ->
-         {
-            log.warn("createWorkingHours: restaurantBranchId is null");
-            return new ResourceNotFoundException("createWorkingHours", "restaurantBranchId", workingHoursCreateDto.restaurantBranchId());
-        });
+                .orElseThrow(() -> new ResourceNotFoundException("createWorkingHours", "restaurantBranchId", workingHoursCreateDto.restaurantBranchId()));
         WorkingHours workingHours = mapper.workingHoursCreateDtoToWorkingHours(workingHoursCreateDto);
         workingHours.setRestaurantBranch(branch);
         workingHoursRepository.save(workingHours);
@@ -49,24 +45,16 @@ public class WorkingHoursServiceImpl implements WorkingHoursService {
     public void deleteWorkingHours(Long id) {
         log.debug("deleteWorkingHours start | WorkingHoursId: {}",id);
         WorkingHours workingHours = workingHoursRepository.findById(id)
-                .orElseThrow(() -> {
-                    log.warn("deleteWorkingHours: workingHoursId: {}",id);
-                    return new ResourceNotFoundException("deleteWorkingHours", "WorkingHoursId", id);
-                });
+                .orElseThrow(() -> new ResourceNotFoundException("deleteWorkingHours", "WorkingHoursId", id));
         workingHoursRepository.delete(workingHours);
         log.info("deleteWorkingHours ended | WorkingHoursId: {}",id);
-
     }
 
     @Override
     public WorkingHoursResponseDto getWorkingHours(Long id) {
         log.debug("getWorkingHours start | WorkingHoursId: {}",id);
       WorkingHours workingHours = workingHoursRepository.findById(id)
-              .orElseThrow(() -> {
-                  log.warn("getWorkingHours: workingHoursId: {}",id);
-                  return new ResourceNotFoundException("getWorkingHours", "WorkingHoursId", id);
-              });
-      log.info("getWorkingHours ended | WorkingHoursId: {}",id);
+              .orElseThrow(() -> new ResourceNotFoundException("getWorkingHours", "WorkingHoursId", id));
       return mapper.workingHoursToWorkingHoursResponseDto(workingHours);
     }
 
@@ -75,10 +63,7 @@ public class WorkingHoursServiceImpl implements WorkingHoursService {
     public WorkingHoursResponseDto updateWorkingHours(WorkingHoursUpdateDto workingHoursUpdateDto) {
         log.debug("updateWorkingHours start | WorkingHOursId: {}", workingHoursUpdateDto.id());
         WorkingHours workingHours = workingHoursRepository.findById(workingHoursUpdateDto.id())
-                .orElseThrow(() -> {
-                    log.warn("updateWorkingHours: workingHoursId: {}",workingHoursUpdateDto.id());
-                    return new ResourceNotFoundException("updateWorkingHours", "id", workingHoursUpdateDto.id());
-                });
+                .orElseThrow(() -> new ResourceNotFoundException("updateWorkingHours", "id", workingHoursUpdateDto.id()));
         if(workingHoursUpdateDto.closingTime()!=null){
             workingHours.setClosingTime(workingHoursUpdateDto.closingTime());
         }
@@ -98,13 +83,8 @@ public class WorkingHoursServiceImpl implements WorkingHoursService {
     public Page<WorkingHoursResponseDto> getWorkingHoursForRestaurantBranch(Pageable pageable, Long restaurantBranchId) {
         log.debug("getWorkingHours start | restaurantBranchId: {}",restaurantBranchId);
         RestaurantBranch branch = restaurantBranchRepository.findById(restaurantBranchId)
-                .orElseThrow(() -> {
-                    log.warn("getWorkingHours: restaurantBranchId: {}",restaurantBranchId);
-                    return new ResourceNotFoundException("getWorkingHours", "restaurantBranchId", restaurantBranchId);
-                        });
-        Page<WorkingHoursResponseDto> responses = workingHoursRepository.findWorkingHoursByRestaurantBranchId(restaurantBranchId,pageable)
+                .orElseThrow(() -> new ResourceNotFoundException("getWorkingHours", "restaurantBranchId", restaurantBranchId));
+        return workingHoursRepository.findWorkingHoursByRestaurantBranchId(restaurantBranchId,pageable)
                 .map(mapper::workingHoursToWorkingHoursResponseDto);
-        log.info("getWorkingHours ended | restaurantBranchId: {}",restaurantBranchId);
-        return responses;
     }
 }

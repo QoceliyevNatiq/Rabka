@@ -46,10 +46,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     public RestaurantResponseDto updateRestaurant(RestaurantUpdateDto updateDto) {
         log.debug("updateRestaurant - start | RestaurantId: {}", updateDto.id());
         Restaurant restaurant = restaurantRepository.findById(updateDto.id())
-                .orElseThrow(() -> {
-                    log.warn("deleteRestaurant - Restaurant not found with id: {}", updateDto.id());
-                    return new ResourceNotFoundException("updateRestaurant","restaurantId", updateDto.id());
-                });
+                .orElseThrow(() -> new ResourceNotFoundException("updateRestaurant","restaurantId", updateDto.id()));
         if(updateDto.logoUrl() != null) {
             restaurant.setLogoUrl(updateDto.logoUrl());
         }
@@ -73,20 +70,14 @@ public class RestaurantServiceImpl implements RestaurantService {
     public RestaurantResponseDto getRestaurantById(Long id) {
         log.debug("getRestaurant - start | Restaurant id: {}", id);
         Restaurant restaurant = restaurantRepository.findById(id)
-                .orElseThrow(() -> {
-                    log.warn("getRestaurant - Restaurant not found with id: {}", id);
-                    return new ResourceNotFoundException("getRestaurant","restaurantId", id);
-                });
-        RestaurantResponseDto responseDto = mapper.restaurantToRestaurantDto(restaurant);
-        log.info("getRestaurant - end | Restaurant id: {}",restaurant.getId());
-        return responseDto;
+                .orElseThrow(() -> new ResourceNotFoundException("getRestaurant","restaurantId", id));
+        return mapper.restaurantToRestaurantDto(restaurant);
     }
 
     @Override
     public void deleteRestaurantById(Long id) {
         log.debug("deleteRestaurant - start | Restaurant id: {}", id);
         if (!restaurantRepository.existsById(id)) {
-            log.warn("deleteRestaurant - Restaurant not found with id: {}", id);
             throw new ResourceNotFoundException("deleteRestaurant","restaurantId", id);
         }
         restaurantRepository.deleteById(id);
@@ -96,37 +87,29 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Page<RestaurantResponseDto> getAllRestaurantsIsActive(Pageable pageable) {
         log.debug("getAllRestaurantsIsActive - start");
-        Page<RestaurantResponseDto> restaurants = restaurantRepository.findByIsActiveTrue(pageable)
+        return restaurantRepository.findByIsActiveTrue(pageable)
                 .map(mapper::restaurantToRestaurantDto);
-        log.info("getAllRestaurantsIsActive - end | Restaurants: {}",restaurants.getTotalElements());
-        return restaurants;
     }
 
     @Override
     public Page<RestaurantResponseDto> getAllRestaurants(Pageable pageable) {
         log.debug("getAllRestaurants - start");
-        Page<RestaurantResponseDto> restaurants = restaurantRepository.findAll(pageable)
+        return restaurantRepository.findAll(pageable)
                 .map(mapper::restaurantToRestaurantDto);
-        log.info("getAllRestaurants - end | Restaurants: {}",restaurants.getTotalElements());
-        return restaurants;
     }
 
     @Override
     public Page<RestaurantResponseDto> findRestaurantsByType(RestaurantType type, Pageable pageable) {
         log.debug("findRestaurantsByType - start | type: {}",type);
-        Page<RestaurantResponseDto>  restaurants = restaurantRepository.findRestaurantByType(type, pageable)
+        return restaurantRepository.findRestaurantByType(type, pageable)
                 .map(mapper::restaurantToRestaurantDto);
-        log.info("findRestaurantsByType - end | type: {}, Restaurants: {}",type,restaurants.getTotalElements());
-        return restaurants;
     }
 
     @Override
     public Page<RestaurantResponseDto> findRestaurantsByNameContainingIgnoreCase(String name, Pageable pageable) {
         log.debug("findRestaurantsByNameContainingIgnoreCase - start | name: {}",name);
-        Page<RestaurantResponseDto> restaurants = restaurantRepository.findRestaurantsByNameContainingIgnoreCase(name,pageable)
+        return restaurantRepository.findRestaurantsByNameContainingIgnoreCase(name,pageable)
                 .map(mapper::restaurantToRestaurantDto);
-        log.info("findRestaurantsByNameContainingIgnoreCase - end | name: {}, Restaurants: {}",name, restaurants.getTotalElements());
-        return restaurants;
     }
 
     @Override
@@ -134,20 +117,15 @@ public class RestaurantServiceImpl implements RestaurantService {
         log.debug("findRestaurantsIsNotClosed - start");
         DayOfWeek day = LocalDate.now().getDayOfWeek();
         LocalTime currentTime = now.toLocalTime();
-        Page<RestaurantResponseDto> restaurants = restaurantRepository.findOpenRestaurantsNow(day, currentTime, pageable)
+        return restaurantRepository.findOpenRestaurantsNow(day, currentTime, pageable)
                         .map(mapper::restaurantToRestaurantDto);
-        log.info("findRestaurantsIsNotClosed - end | restaurants: {}",restaurants);
-        return  restaurants;
     }
 
     @Override
     public RestaurantResponseDto updateRestaurantStatus(Long id, RestaurantStatus status) {
         log.debug("updateRestaurantStatus - start | id: {}, status: {}",id,status);
         Restaurant restaurant = restaurantRepository.findById(id)
-                .orElseThrow(() -> {
-                    log.warn("updateRestaurantStatus - Restaurant not found with id: {}", id);
-                    return new ResourceNotFoundException("updateRestaurant","restaurantId", id);
-                });
+                .orElseThrow(() -> new ResourceNotFoundException("updateRestaurant","restaurantId", id));
         restaurant.setStatus(status);
         restaurantRepository.save(restaurant);
         return mapper.restaurantToRestaurantDto(restaurant);
