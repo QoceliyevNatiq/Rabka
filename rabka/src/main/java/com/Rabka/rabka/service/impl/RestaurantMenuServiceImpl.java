@@ -4,20 +4,17 @@ import com.Rabka.rabka.dto.RestaurantMenu.RestaurantMenuCreateDto;
 import com.Rabka.rabka.dto.RestaurantMenu.RestaurantMenuResponseDto;
 import com.Rabka.rabka.dto.RestaurantMenu.RestaurantMenuUpdateDto;
 import com.Rabka.rabka.entity.RestaurantMenu;
-import com.Rabka.rabka.exception.ResourceNotFoundException;
+import com.rabka.common.exception.ResourceNotFoundException;
 import com.Rabka.rabka.mapstruct.RestaurantMenuMapper;
 import com.Rabka.rabka.repo.RestaurantMenuRepository;
 import com.Rabka.rabka.repo.RestaurantRepository;
 import com.Rabka.rabka.service.RestaurantMenuService;
-import com.Rabka.rabka.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @Slf4j

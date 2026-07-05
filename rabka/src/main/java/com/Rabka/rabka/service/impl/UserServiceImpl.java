@@ -4,7 +4,7 @@ import com.Rabka.rabka.dto.LoginDto;
 import com.Rabka.rabka.dto.RegisterDto;
 import com.Rabka.rabka.dto.UserResponse;
 import com.Rabka.rabka.entity.users.User;
-import com.Rabka.rabka.exception.AlreadyExistException;
+import com.rabka.common.exception.AlreadyExistException;
 import com.Rabka.rabka.mapstruct.UserMapper;
 import com.Rabka.rabka.repo.UserRepository;
 import com.Rabka.rabka.security.JwtUtil;

@@ -1,4 +1,4 @@
-package com.Rabka.rabka.exception;
+package com.rabka.common.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException ex) {
+    @ExceptionHandler(com.rabka.common.exception.ResourceNotFoundException.class)
+    public ResponseEntity<String> handleResourceNotFoundException(com.rabka.common.exception.ResourceNotFoundException ex) {
         log.warn("Resource not found: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }

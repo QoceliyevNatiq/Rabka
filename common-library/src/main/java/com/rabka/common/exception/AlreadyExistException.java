@@ -1,4 +1,4 @@
-package com.Rabka.rabka.exception;
+package com.rabka.common.exception;
 
 import lombok.Getter;
 

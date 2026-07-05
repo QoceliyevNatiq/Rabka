@@ -5,7 +5,7 @@ import com.Rabka.rabka.dto.WorkingHours.WorkingHoursResponseDto;
 import com.Rabka.rabka.dto.WorkingHours.WorkingHoursUpdateDto;
 import com.Rabka.rabka.entity.RestaurantBranch;
 import com.Rabka.rabka.entity.WorkingHours;
-import com.Rabka.rabka.exception.ResourceNotFoundException;
+import com.rabka.common.exception.ResourceNotFoundException;
 import com.Rabka.rabka.mapstruct.WorkingHoursMapper;
 import com.Rabka.rabka.repo.RestaurantBranchRepository;
 import com.Rabka.rabka.repo.WorkingHoursRepository;

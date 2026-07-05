@@ -6,7 +6,7 @@ import com.Rabka.rabka.dto.food.FoodResponseDto;
 import com.Rabka.rabka.dto.food.FoodUpdateDto;
 import com.Rabka.rabka.entity.Food;
 import com.Rabka.rabka.entity.MenuCategory;
-import com.Rabka.rabka.exception.ResourceNotFoundException;
+import com.rabka.common.exception.ResourceNotFoundException;
 import com.Rabka.rabka.repo.FoodRepository;
 import com.Rabka.rabka.repo.MenuCategoryRepository;
 import com.Rabka.rabka.service.FoodService;

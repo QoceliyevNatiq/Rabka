@@ -1,6 +1,6 @@
 package com.Rabka.rabka.service.impl;
 
-import com.Rabka.rabka.exception.ResourceNotFoundException;
+import com.rabka.common.exception.ResourceNotFoundException;
 import com.Rabka.rabka.mapstruct.RestaurantMapper;
 
 import java.sql.Time;
