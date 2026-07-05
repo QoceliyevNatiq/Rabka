@@ -14,7 +14,7 @@ public record RegisterDto(
         String email,
 
         @NotBlank(message = "password bos ola bilmez")
-        @Size(max = 20)
+        @Size(min = 8, max = 20)
         String password,
 
         @NotNull(message = "doqum tarixi bos ola bilmez")

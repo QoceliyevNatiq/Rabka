@@ -1,6 +1,6 @@
 package com.Rabka.rabka.repo;
 
-import org.apache.catalina.User;
+import com.Rabka.rabka.entity.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -23,7 +23,7 @@ public class JwtUtil {
 
     public String extractUsername(String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(token.getBytes())
+                .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token).getBody().getSubject();
     }
@@ -43,7 +43,7 @@ public class JwtUtil {
    public boolean validateToken(String token, UserDetails userDetails){
         String username = extractUsername(token);
         Date expirationDate = Jwts.parserBuilder()
-                .setSigningKey(token.getBytes())
+                .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token).getBody()
                 .getExpiration();

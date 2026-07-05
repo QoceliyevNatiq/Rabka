@@ -9,21 +9,24 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-public class SecurtiyConfig {
+public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtFilter jwtFilter) throws Exception {
 
         HttpSecurity security = http
                 .sessionManagement(menagement -> menagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS ))
                 .authorizeHttpRequests(Aurthorize -> Aurthorize.requestMatchers("/api/**").authenticated()
+                                .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/super-admin/**").authenticated()
                                 .anyRequest().hasRole("ADMIN")
                                 .anyRequest().permitAll()
 
-                        );
+                        )
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return security.build();
 
 

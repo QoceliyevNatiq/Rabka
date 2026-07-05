@@ -5,8 +5,11 @@ import com.Rabka.rabka.dto.RestaurantMenu.RestaurantMenuResponseDto;
 import com.Rabka.rabka.dto.RestaurantMenu.RestaurantMenuUpdateDto;
 import com.Rabka.rabka.entity.RestaurantMenu;
 import com.Rabka.rabka.exception.ResourceNotFoundException;
+import com.Rabka.rabka.mapstruct.RestaurantMenuMapper;
 import com.Rabka.rabka.repo.RestaurantMenuRepository;
+import com.Rabka.rabka.repo.RestaurantRepository;
 import com.Rabka.rabka.service.RestaurantMenuService;
+import com.Rabka.rabka.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -14,13 +17,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class RestaurantMenuServiceImpl implements RestaurantMenuService {
 
     private final RestaurantMenuRepository restaurantMenuRepository;
-    private final
+    private final RestaurantMenuMapper mapper;
+    private final RestaurantRepository restaurantRepository;
 
     @Override
     public void deleteById(Long menuId) {
@@ -34,8 +40,11 @@ public class RestaurantMenuServiceImpl implements RestaurantMenuService {
 
     @Override
     public RestaurantMenuResponseDto create(RestaurantMenuCreateDto dto) {
-//        log.debug("RestaurantMenu create start");
-
+        log.debug("RestaurantMenu create start");
+        if(!restaurantRepository.existsById(dto.restaurantId())) throw new ResourceNotFoundException("create","restaurantId",dto.restaurantId());
+        restaurantMenuRepository.save(mapper.restaurantMenuCreateDtoToRestaurantMenu(dto));
+        log.info("RestaurantMenu create ended | id: {}", dto.restaurantId());
+        return  mapper.restaurantCreateToRestaurantMenuResponseDto(dto);
     }
 
     @Override
@@ -49,16 +58,21 @@ public class RestaurantMenuServiceImpl implements RestaurantMenuService {
         }
         restaurantMenu.setName(dto.name());
         log.info("RestaurantMenu update ended | id: {}", dto.id());
-        return mapper
+        return mapper.restaurantMenuToRestaurantMenuResponseDto(restaurantMenu);
     }
 
     @Override
     public RestaurantMenuResponseDto findById(Long id) {
-        return null;
+        log.debug("RestaurantMenu findById start | id: {}", id);
+        RestaurantMenu restaurantMenu = restaurantMenuRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("findById", "id", id));
+        return mapper.restaurantMenuToRestaurantMenuResponseDto(restaurantMenu);
     }
 
     @Override
     public Page<RestaurantMenuResponseDto> findAll(Pageable pageable) {
-        return null;
+        log.debug("RestaurantMenu findAll start");
+        return restaurantMenuRepository.findAll(pageable)
+                .map(mapper::restaurantMenuToRestaurantMenuResponseDto);
     }
 }
