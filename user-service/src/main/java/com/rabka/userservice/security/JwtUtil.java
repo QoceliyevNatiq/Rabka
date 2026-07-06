@@ -1,5 +1,4 @@
-package com.Rabka.rabka.security;
-
+package com.rabka.userservice.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -16,7 +15,7 @@ import java.util.Date;
 public class JwtUtil {
 
     @Value("${jwt.secret}")
-    private  String jwtSecret;
+    private String jwtSecret;
 
     @Value("${jwt.expiration}")
     private Long expiration;
@@ -36,11 +35,12 @@ public class JwtUtil {
                 .setSubject(userDetails.getUsername())
                 .compact();
     }
-    private SecretKey getSigningKey(){
+
+    private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
     }
 
-   public boolean validateToken(String token, UserDetails userDetails){
+    public boolean validateToken(String token, UserDetails userDetails) {
         String username = extractUsername(token);
         Date expirationDate = Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
@@ -48,18 +48,5 @@ public class JwtUtil {
                 .parseClaimsJws(token).getBody()
                 .getExpiration();
         return username.equals(userDetails.getUsername()) && expirationDate.after(new Date());
-   }
-
-   public boolean validateToken(String token) {
-        try {
-            Jwts.parserBuilder()
-                    .setSigningKey(getSigningKey())
-                    .build()
-                    .parseClaimsJws(token);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-   }
-
+    }
 }

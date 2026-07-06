@@ -1,6 +1,6 @@
 package com.Rabka.rabka.service.impl;
 
-import com.Rabka.rabka.mapstruct.UserMapper;
+import com.Rabka.rabka.mapstruct.FoodMapper;
 import com.Rabka.rabka.dto.food.FoodCreateDto;
 import com.Rabka.rabka.dto.food.FoodResponseDto;
 import com.Rabka.rabka.dto.food.FoodUpdateDto;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class FoodServiceImpl implements FoodService {
     private final FoodRepository foodRepository;
-    private final UserMapper userMapper;
+    private final FoodMapper foodMapper;
     private final MenuCategoryRepository categoryRepository;
 
 
@@ -32,10 +32,10 @@ public class FoodServiceImpl implements FoodService {
         log.debug("createFood started | Category id; {} | FoodName; {}",food.categoryId(),food.name());
         MenuCategory category = categoryRepository.findById(food.categoryId())
                         .orElseThrow(() -> new ResourceNotFoundException("createFood","CategoryId", food.categoryId()));
-        Food foodEntity = userMapper.createDtoToFood(food);
+        Food foodEntity = foodMapper.createDtoToFood(food);
         foodRepository.save(foodEntity);
         log.info("createFood finished | Food id {}", foodEntity.getId());
-        return userMapper.foodToFoodResponseDto(foodEntity);
+        return foodMapper.foodToFoodResponseDto(foodEntity);
 
     }
 
@@ -67,7 +67,7 @@ public class FoodServiceImpl implements FoodService {
             food.setIsActive(foodUpdateDto.isActive());
         }
         log.info("updateFood finished | Food id {}", food.getId());
-        return userMapper.foodToFoodResponseDto(foodRepository.save(food));
+        return foodMapper.foodToFoodResponseDto(foodRepository.save(food));
 
 
     }
@@ -98,7 +98,7 @@ public class FoodServiceImpl implements FoodService {
         log.debug("getFoodById started | Food id; {}",foodId);
         Food food = foodRepository.findById(foodId)
                 .orElseThrow(() -> new ResourceNotFoundException("food", "foodId", foodId));
-        return userMapper.foodToFoodResponseDto(food);
+        return foodMapper.foodToFoodResponseDto(food);
 
     }
 
@@ -106,39 +106,39 @@ public class FoodServiceImpl implements FoodService {
     public Page<FoodResponseDto> findFoodByNameContainingIgnoreCase(String foodName, Pageable pageable) {
         log.debug("findFoodByNameContainingIgnoreCase started | foodName; {}",foodName);
         return foodRepository.findFoodByNameContainingIgnoreCase(foodName,pageable)
-                .map(userMapper::foodToFoodResponseDto);
+                .map(foodMapper::foodToFoodResponseDto);
     }
 
     @Override
     public Page<FoodResponseDto> findFoodByCategoryId(Long foodCategoryId, Pageable pageable) {
         log.debug("findFoodByCategoryId started | foodCategoryId; {}",foodCategoryId);
         return foodRepository.findFoodByCategoryId(foodCategoryId,pageable)
-                .map(userMapper::foodToFoodResponseDto);
+                .map(foodMapper::foodToFoodResponseDto);
     }
 
     @Override
     public Page<FoodResponseDto> findFoodByCategoryName(String foodCategoryName, Pageable pageable) {
         log.debug("findFoodByCategoryName started | foodCategoryName; {}",foodCategoryName);
         return foodRepository.findFoodByCategoryName(foodCategoryName,pageable)
-                .map(userMapper::foodToFoodResponseDto);
+                .map(foodMapper::foodToFoodResponseDto);
     }
 
     @Override
     public Page<FoodResponseDto> findFoodByPrice(Double min, Double max, Pageable pageable) {
         log.debug("foodByPrice started | min; {}, max; {}",min,max);
         return foodRepository.findFoodByPriceBetween(min,max,pageable)
-                .map(userMapper::foodToFoodResponseDto);
+                .map(foodMapper::foodToFoodResponseDto);
     }
 
     @Override
     public Page<FoodResponseDto> getAllFoodForAdmin(Pageable pageable) {
         log.debug("getAllFood started");
-        return foodRepository.findAll(pageable).map(userMapper::foodToFoodResponseDto);
+        return foodRepository.findAll(pageable).map(foodMapper::foodToFoodResponseDto);
     }
 
     @Override
     public Page<FoodResponseDto> getAllFood(Pageable pageable) {
         log.debug("getAllFoodForAdmin started | pageable; {}",pageable);
-        return foodRepository.findAllFoodIsActive(pageable).map(userMapper::foodToFoodResponseDto);
+        return foodRepository.findAllFoodIsActive(pageable).map(foodMapper::foodToFoodResponseDto);
     }
 }
