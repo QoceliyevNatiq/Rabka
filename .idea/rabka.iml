@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/common-library/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/rabka/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/api-gateway/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/eureka-server/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/order-service/src/main/java" isTestSource="false" />
     </content>
   </component>

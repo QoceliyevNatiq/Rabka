@@ -1,8 +1,9 @@
-package com.Rabka.rabka.mapstruct;
+package com.rabka.foodservice.mapsturct;
 
-import com.Rabka.rabka.dto.food.FoodCreateDto;
-import com.Rabka.rabka.dto.food.FoodResponseDto;
-import com.Rabka.rabka.entity.Food;
+
+import com.rabka.foodservice.dto.food.FoodCreateDto;
+import com.rabka.foodservice.dto.food.FoodResponseDto;
+import com.rabka.foodservice.entity.Food;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

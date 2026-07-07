@@ -1,15 +1,15 @@
-package com.Rabka.rabka.service.impl;
+package com.rabka.foodservice.service;
 
-import com.Rabka.rabka.mapstruct.FoodMapper;
-import com.Rabka.rabka.dto.food.FoodCreateDto;
-import com.Rabka.rabka.dto.food.FoodResponseDto;
-import com.Rabka.rabka.dto.food.FoodUpdateDto;
-import com.Rabka.rabka.entity.Food;
-import com.Rabka.rabka.entity.MenuCategory;
+
 import com.rabka.common.exception.ResourceNotFoundException;
-import com.Rabka.rabka.repo.FoodRepository;
-import com.Rabka.rabka.repo.MenuCategoryRepository;
-import com.Rabka.rabka.service.FoodService;
+import com.rabka.foodservice.dto.food.FoodCreateDto;
+import com.rabka.foodservice.dto.food.FoodResponseDto;
+import com.rabka.foodservice.dto.food.FoodUpdateDto;
+import com.rabka.foodservice.entity.Food;
+import com.rabka.foodservice.entity.MenuCategory;
+import com.rabka.foodservice.mapsturct.FoodMapper;
+import com.rabka.foodservice.repository.FoodRepository;
+import com.rabka.foodservice.repository.MenuCategoryRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

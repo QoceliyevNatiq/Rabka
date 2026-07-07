@@ -15,23 +15,15 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.6.3/mapstruct-processor-1.6.3.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.6.3/mapstruct-processor-1.6.3.jar" />
-        </processorPath>
-        <module name="api-gateway" />
-        <module name="user-service" />
-        <module name="common-library" />
-        <module name="rabka" />
-      </profile>
-      <profile name="Annotation profile for order" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.6.3/mapstruct-processor-1.6.3.jar" />
         </processorPath>
         <module name="rabka (1)" />
+        <module name="restaurant-service" />
+        <module name="api-gateway" />
+        <module name="food-service" />
+        <module name="user-service" />
+        <module name="common-library" />
+        <module name="eureka-server" />
+        <module name="rabka" />
       </profile>
     </annotationProcessing>
   </component>
@@ -39,8 +31,11 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
       <module name="common-library" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
+      <module name="food-service" options="-parameters" />
       <module name="rabka" options="-parameters" />
       <module name="rabka (1)" options="-parameters" />
+      <module name="restaurant-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>

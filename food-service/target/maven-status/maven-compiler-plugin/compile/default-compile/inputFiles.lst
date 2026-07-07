@@ -1,0 +1,12 @@
+C:\Users\Natiq\Downloads\rabka\food-service\src\main\java\com\rabka\foodservice\controller\FoodController.java
+C:\Users\Natiq\Downloads\rabka\food-service\src\main\java\com\rabka\foodservice\dto\food\FoodCreateDto.java
+C:\Users\Natiq\Downloads\rabka\food-service\src\main\java\com\rabka\foodservice\dto\food\FoodResponseDto.java
+C:\Users\Natiq\Downloads\rabka\food-service\src\main\java\com\rabka\foodservice\dto\food\FoodUpdateDto.java
+C:\Users\Natiq\Downloads\rabka\food-service\src\main\java\com\rabka\foodservice\dto\MenuCategory\MenuCategoryResponseDto.java
+C:\Users\Natiq\Downloads\rabka\food-service\src\main\java\com\rabka\foodservice\entity\Food.java
+C:\Users\Natiq\Downloads\rabka\food-service\src\main\java\com\rabka\foodservice\entity\MenuCategory.java
+C:\Users\Natiq\Downloads\rabka\food-service\src\main\java\com\rabka\foodservice\mapsturct\FoodMapper.java
+C:\Users\Natiq\Downloads\rabka\food-service\src\main\java\com\rabka\foodservice\repository\FoodRepository.java
+C:\Users\Natiq\Downloads\rabka\food-service\src\main\java\com\rabka\foodservice\repository\MenuCategoryRepository.java
+C:\Users\Natiq\Downloads\rabka\food-service\src\main\java\com\rabka\foodservice\service\FoodService.java
+C:\Users\Natiq\Downloads\rabka\food-service\src\main\java\com\rabka\foodservice\service\FoodServiceImpl.java

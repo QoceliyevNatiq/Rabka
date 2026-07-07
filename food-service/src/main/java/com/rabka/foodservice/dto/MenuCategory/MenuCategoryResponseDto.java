@@ -1,6 +1,6 @@
-package com.Rabka.rabka.dto.MenuCategory;
+package com.rabka.foodservice.dto.MenuCategory;
 
-import com.Rabka.rabka.dto.food.FoodResponseDto;
+
 
 import java.util.List;
 

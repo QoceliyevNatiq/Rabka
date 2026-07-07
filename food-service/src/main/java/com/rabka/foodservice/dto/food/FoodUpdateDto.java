@@ -1,4 +1,4 @@
-package com.Rabka.rabka.dto.food;
+package com.rabka.foodservice.dto.food;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

@@ -1,4 +1,4 @@
-package com.Rabka.rabka.dto.food;
+package com.rabka.foodservice.dto.food;
 
 import java.math.BigDecimal;
 

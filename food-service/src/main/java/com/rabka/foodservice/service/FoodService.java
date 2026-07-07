@@ -1,8 +1,9 @@
-package com.Rabka.rabka.service;
+package com.rabka.foodservice.service;
 
-import com.Rabka.rabka.dto.food.FoodCreateDto;
-import com.Rabka.rabka.dto.food.FoodResponseDto;
-import com.Rabka.rabka.dto.food.FoodUpdateDto;
+
+import com.rabka.foodservice.dto.food.FoodCreateDto;
+import com.rabka.foodservice.dto.food.FoodResponseDto;
+import com.rabka.foodservice.dto.food.FoodUpdateDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

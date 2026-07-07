@@ -1,4 +1,4 @@
-package com.Rabka.rabka.entity;
+package com.rabka.foodservice.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

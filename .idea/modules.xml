@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/food-service/food-service.iml" filepath="$PROJECT_DIR$/food-service/food-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/rabka.iml" filepath="$PROJECT_DIR$/.idea/rabka.iml" />
       <module fileurl="file://$PROJECT_DIR$/rabka-parent.iml" filepath="$PROJECT_DIR$/rabka-parent.iml" />
     </modules>

@@ -1,10 +1,10 @@
-package com.Rabka.rabka.controller;
+package com.rabka.foodservice.controller;
 
 
-import com.Rabka.rabka.dto.food.FoodCreateDto;
-import com.Rabka.rabka.dto.food.FoodResponseDto;
-import com.Rabka.rabka.dto.food.FoodUpdateDto;
-import com.Rabka.rabka.service.FoodService;
+import com.rabka.foodservice.dto.food.FoodCreateDto;
+import com.rabka.foodservice.dto.food.FoodResponseDto;
+import com.rabka.foodservice.dto.food.FoodUpdateDto;
+import com.rabka.foodservice.service.FoodService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

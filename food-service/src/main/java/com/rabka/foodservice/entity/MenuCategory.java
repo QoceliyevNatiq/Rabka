@@ -1,4 +1,4 @@
-package com.Rabka.rabka.entity;
+package com.rabka.foodservice.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,9 +25,8 @@ public class MenuCategory {
     @Column(nullable = false,length = 255)
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "menuCategory_id")
-    private RestaurantMenu menuCategory;
+    @Column(nullable = false)
+    private Long menuCategoryId;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "menuCategory")
     private List<Food> foods;

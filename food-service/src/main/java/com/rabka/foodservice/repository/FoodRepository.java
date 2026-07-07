@@ -1,7 +1,7 @@
-package com.Rabka.rabka.repo;
+package com.rabka.foodservice.repository;
 
-import com.Rabka.rabka.dto.food.FoodResponseDto;
-import com.Rabka.rabka.entity.Food;
+
+import com.rabka.foodservice.entity.Food;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
