@@ -2,9 +2,9 @@ package com.rabka.userservice.service;
 
 import com.rabka.userservice.dto.LoginDto;
 import com.rabka.userservice.dto.RegisterDto;
-import com.rabka.userservice.dto.UserResponse;
+import com.rabka.userservice.dto.UserResponseDto;
 
 public interface UserService {
-    UserResponse login(LoginDto loginDto);
+    UserResponseDto login(LoginDto loginDto);
     void register(RegisterDto registerDto);
 }

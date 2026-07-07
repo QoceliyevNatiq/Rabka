@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,6 @@ public class JwtAuthFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String path = exchange.getRequest().getURI().getPath();
 
-        // /api/auth/** - public, filter keçirmə
         if (path.startsWith("/api/auth/")) {
             return chain.filter(exchange);
         }
@@ -48,7 +48,6 @@ public class JwtAuthFilter implements GlobalFilter, Ordered {
                     .getBody()
                     .getSubject();
 
-            // İstifadəçi adını header-ə əlavə et (downstream servisə ötür)
             exchange.getRequest().mutate()
                     .header("X-User-Id", username);
 

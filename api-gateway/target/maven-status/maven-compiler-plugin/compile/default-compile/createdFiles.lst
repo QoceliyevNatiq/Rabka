@@ -1,0 +1,3 @@
+com\rabka\gateway\security\JwtUtil.class
+com\rabka\gateway\ApiGatewayApplication.class
+com\rabka\gateway\security\JwtAuthFilter.class

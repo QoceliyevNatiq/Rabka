@@ -1,6 +1,7 @@
 package com.rabka.userservice.mapper;
 
 import com.rabka.userservice.dto.RegisterDto;
+import com.rabka.userservice.dto.UserResponseDto;
 import com.rabka.userservice.entity.User;
 import java.time.LocalDate;
 import javax.annotation.processing.Generated;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-07-06T18:41:55+0400",
+    date = "2026-07-07T12:24:56+0400",
     comments = "version: 1.6.3, compiler: javac, environment: Java 26 (Oracle Corporation)"
 )
 @Component
@@ -49,5 +50,18 @@ public class UserMapperImpl implements UserMapper {
         user.password( registerDto.password() );
 
         return user.build();
+    }
+
+    @Override
+    public UserResponseDto userToUserResponseDto(User user) {
+        if ( user == null ) {
+            return null;
+        }
+
+        UserResponseDto.UserResponseDtoBuilder userResponseDto = UserResponseDto.builder();
+
+        userResponseDto.email( user.getEmail() );
+
+        return userResponseDto.build();
     }
 }

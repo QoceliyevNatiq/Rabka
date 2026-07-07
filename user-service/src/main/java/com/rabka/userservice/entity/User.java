@@ -33,6 +33,9 @@ public class User implements UserDetails {
     @Column(nullable = false, length = 255)
     private String password;
 
+    @Column(nullable = false)
+    private Boolean isActive = true;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
