@@ -1,10 +1,10 @@
 package com.rabka.restaurantservice.service;
 
-import com.Rabka.rabka.dto.Restauran.RestaurantCreateDto;
-import com.Rabka.rabka.dto.Restauran.RestaurantResponseDto;
-import com.Rabka.rabka.dto.Restauran.RestaurantUpdateDto;
-import com.Rabka.rabka.entity.RestaurantStatus;
-import com.Rabka.rabka.entity.RestaurantType;
+import com.rabka.restaurantservice.dto.Restauran.RestaurantCreateDto;
+import com.rabka.restaurantservice.dto.Restauran.RestaurantResponseDto;
+import com.rabka.restaurantservice.dto.Restauran.RestaurantUpdateDto;
+import com.rabka.restaurantservice.entity.RestaurantStatus;
+import com.rabka.restaurantservice.entity.RestaurantType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

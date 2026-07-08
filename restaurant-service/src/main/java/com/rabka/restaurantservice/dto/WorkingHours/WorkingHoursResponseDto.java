@@ -1,4 +1,4 @@
-package com.Rabka.rabka.dto.WorkingHours;
+package com.rabka.restaurantservice.dto.WorkingHours;
 
 import java.time.LocalTime;
 

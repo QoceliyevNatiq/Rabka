@@ -1,9 +1,9 @@
-package com.Rabka.rabka.controller;
+package com.rabka.restaurantservice.controller;
 
-import com.Rabka.rabka.dto.RestaurantMenu.RestaurantMenuCreateDto;
-import com.Rabka.rabka.dto.RestaurantMenu.RestaurantMenuResponseDto;
-import com.Rabka.rabka.dto.RestaurantMenu.RestaurantMenuUpdateDto;
-import com.Rabka.rabka.service.RestaurantMenuService;
+import com.rabka.restaurantservice.dto.RestaurantMenu.RestaurantMenuCreateDto;
+import com.rabka.restaurantservice.dto.RestaurantMenu.RestaurantMenuResponseDto;
+import com.rabka.restaurantservice.dto.RestaurantMenu.RestaurantMenuUpdateDto;
+import com.rabka.restaurantservice.service.RestaurantMenuService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,6 +1,6 @@
 package com.rabka.restaurantservice.entity;
 
-import com.Rabka.rabka.entity.RestaurantBranch;
+import com.rabka.restaurantservice.entity.RestaurantBranch;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

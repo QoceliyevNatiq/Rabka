@@ -1,9 +1,10 @@
 package com.rabka.restaurantservice.mapstruct;
 
+import org.mapstruct.Mapper;
 
-import com.Rabka.rabka.dto.WorkingHours.WorkingHoursCreateDto;
-import com.Rabka.rabka.dto.WorkingHours.WorkingHoursResponseDto;
-import com.Rabka.rabka.dto.WorkingHours.WorkingHoursUpdateDto;
+import com.rabka.restaurantservice.dto.WorkingHours.WorkingHoursCreateDto;
+import com.rabka.restaurantservice.dto.WorkingHours.WorkingHoursResponseDto;
+import com.rabka.restaurantservice.dto.WorkingHours.WorkingHoursUpdateDto;
 import com.rabka.restaurantservice.entity.WorkingHours;
 
 

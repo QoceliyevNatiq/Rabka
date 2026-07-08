@@ -1,13 +1,20 @@
 package com.rabka.restaurantservice.controller;
 
+import com.rabka.restaurantservice.dto.Restauran.RestaurantResponseDto;
+import com.rabka.restaurantservice.entity.RestaurantStatus;
+import com.rabka.restaurantservice.entity.RestaurantType;
+import com.rabka.restaurantservice.service.RestaurantService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-
-
-
-import com.Rabka.rabka.entity.RestaurantStatus;
-import com.Rabka.rabka.service.RestaurantService;
-
-import java.awt.print.Pageable;
 import java.net.URI;
 import java.sql.Time;
 
@@ -20,9 +27,9 @@ public class RestaurantController {
     private final RestaurantService restaurantService;
 
     @PostMapping
-    public ResponseEntity<com.Rabka.rabka.dto.Restauran.RestaurantResponseDto> create(@RequestBody @Valid com.Rabka.rabka.dto.Restauran.RestaurantCreateDto dto) {
+    public ResponseEntity<com.rabka.restaurantservice.dto.Restauran.RestaurantResponseDto> create(@RequestBody @Valid com.rabka.restaurantservice.dto.Restauran.RestaurantCreateDto dto) {
         log.debug("Rest request to create restaurant | name: {}", dto.name());
-        com.Rabka.rabka.dto.Restauran.RestaurantResponseDto response = restaurantService.createRestaurant(dto);
+        com.rabka.restaurantservice.dto.Restauran.RestaurantResponseDto response = restaurantService.createRestaurant(dto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(response.id()).toUri();
         log.info("Rest request to create restaurant | id: {}", response.id());
@@ -30,31 +37,31 @@ public class RestaurantController {
     }
 
     @PatchMapping("/update")
-    public ResponseEntity<com.Rabka.rabka.dto.Restauran.RestaurantResponseDto> update(@RequestBody @Valid com.Rabka.rabka.dto.Restauran.RestaurantUpdateDto dto) {
+    public ResponseEntity<com.rabka.restaurantservice.dto.Restauran.RestaurantResponseDto> update(@RequestBody @Valid com.rabka.restaurantservice.dto.Restauran.RestaurantUpdateDto dto) {
         log.debug("Rest request to update restaurant | id: {}", dto.id());
-        com.Rabka.rabka.dto.Restauran.RestaurantResponseDto response = restaurantService.updateRestaurant(dto);
+        com.rabka.restaurantservice.dto.Restauran.RestaurantResponseDto response = restaurantService.updateRestaurant(dto);
         log.info("Rest request to update restaurant | id: {}", response.id());
         return ResponseEntity.ok().body(response);
     }
 
     @PatchMapping("/status/{id}")
-    public ResponseEntity<com.Rabka.rabka.dto.Restauran.RestaurantResponseDto> updateStatus(@PathVariable Long id, @RequestParam RestaurantStatus status) {
+    public ResponseEntity<com.rabka.restaurantservice.dto.Restauran.RestaurantResponseDto> updateStatus(@PathVariable Long id, @RequestParam RestaurantStatus status) {
         log.debug("Rest request to update restaurant status | id: {}, status: {}", id, status);
-        com.Rabka.rabka.dto.Restauran.RestaurantResponseDto response = restaurantService.updateRestaurantStatus(id, status);
+        com.rabka.restaurantservice.dto.Restauran.RestaurantResponseDto response = restaurantService.updateRestaurantStatus(id, status);
         log.info("Rest request to update restaurant status | id: {}", response.id());
         return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/active")
-    public ResponseEntity<Page<com.Rabka.rabka.dto.Restauran.RestaurantResponseDto>> getAllActive(@PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+    public ResponseEntity<Page<com.rabka.restaurantservice.dto.Restauran.RestaurantResponseDto>> getAllActive(@PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         log.debug("Rest request to get all active restaurants");
-        Page<com.Rabka.rabka.dto.Restauran.RestaurantResponseDto> response = restaurantService.getAllRestaurantsIsActive(pageable);
+        Page<com.rabka.restaurantservice.dto.Restauran.RestaurantResponseDto> response = restaurantService.getAllRestaurantsIsActive(pageable);
         log.info("Rest request to get all active restaurants | totalElements: {}", response.getTotalElements());
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/open")
-    public ResponseEntity<Page<com.Rabka.rabka.dto.Restauran.RestaurantResponseDto>> getOpenRestaurants(@RequestParam Time now, @PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+    public ResponseEntity<Page<com.rabka.restaurantservice.dto.Restauran.RestaurantResponseDto>> getOpenRestaurants(@RequestParam Time now, @PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         log.debug("Rest request to get open restaurants | now: {}", now);
         Page<RestaurantResponseDto> response = restaurantService.findRestaurantsIsNotClosed(pageable, now);
         log.info("Rest request to get open restaurants | totalElements: {}", response.getTotalElements());

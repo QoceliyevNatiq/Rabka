@@ -1,6 +1,6 @@
 package com.rabka.restaurantservice.repository;
 
-import com.Rabka.rabka.entity.RestaurantBranch;
+import com.rabka.restaurantservice.entity.RestaurantBranch;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,8 @@
 package com.rabka.restaurantservice.service;
 
-import com.Rabka.rabka.dto.WorkingHours.WorkingHoursCreateDto;
-import com.Rabka.rabka.dto.WorkingHours.WorkingHoursResponseDto;
-import com.Rabka.rabka.dto.WorkingHours.WorkingHoursUpdateDto;
+import com.rabka.restaurantservice.dto.WorkingHours.WorkingHoursCreateDto;
+import com.rabka.restaurantservice.dto.WorkingHours.WorkingHoursResponseDto;
+import com.rabka.restaurantservice.dto.WorkingHours.WorkingHoursUpdateDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

@@ -1,4 +1,4 @@
-package com.Rabka.rabka.dto.RestaurantMenu;
+package com.rabka.restaurantservice.dto.RestaurantMenu;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

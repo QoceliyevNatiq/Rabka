@@ -1,6 +1,6 @@
-package com.Rabka.rabka.dto.Restauran;
+package com.rabka.restaurantservice.dto.Restauran;
 
-import com.Rabka.rabka.entity.RestaurantType;
+import com.rabka.restaurantservice.entity.RestaurantType;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 

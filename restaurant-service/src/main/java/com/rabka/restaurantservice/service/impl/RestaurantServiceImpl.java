@@ -1,18 +1,20 @@
 package com.rabka.restaurantservice.service.impl;
 
 import com.rabka.common.exception.ResourceNotFoundException;
-import com.Rabka.rabka.mapstruct.RestaurantMapper;
+import com.rabka.restaurantservice.mapstruct.RestaurantMapper;
 
 import java.sql.Time;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import com.Rabka.rabka.dto.Restauran.RestaurantCreateDto;
-import com.Rabka.rabka.dto.Restauran.RestaurantResponseDto;
-import com.Rabka.rabka.dto.Restauran.RestaurantUpdateDto;
+import com.rabka.restaurantservice.dto.Restauran.RestaurantCreateDto;
+import com.rabka.restaurantservice.dto.Restauran.RestaurantResponseDto;
+import com.rabka.restaurantservice.dto.Restauran.RestaurantUpdateDto;
 
 import com.rabka.restaurantservice.entity.Restaurant;
+import com.rabka.restaurantservice.entity.RestaurantStatus;
+import com.rabka.restaurantservice.entity.RestaurantType;
 import com.rabka.restaurantservice.repository.RestaurantRepository;
 import com.rabka.restaurantservice.service.RestaurantService;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.Rabka.rabka.entity;
+package com.rabka.restaurantservice.entity;
 
 import com.rabka.restaurantservice.entity.Restaurant;
 import com.rabka.restaurantservice.entity.WorkingHours;

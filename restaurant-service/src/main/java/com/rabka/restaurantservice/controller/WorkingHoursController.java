@@ -1,9 +1,9 @@
-package com.Rabka.rabka.controller;
+package com.rabka.restaurantservice.controller;
 
-import com.Rabka.rabka.dto.WorkingHours.WorkingHoursCreateDto;
-import com.Rabka.rabka.dto.WorkingHours.WorkingHoursResponseDto;
-import com.Rabka.rabka.dto.WorkingHours.WorkingHoursUpdateDto;
-import com.Rabka.rabka.service.WorkingHoursService;
+import com.rabka.restaurantservice.dto.WorkingHours.WorkingHoursCreateDto;
+import com.rabka.restaurantservice.dto.WorkingHours.WorkingHoursResponseDto;
+import com.rabka.restaurantservice.dto.WorkingHours.WorkingHoursUpdateDto;
+import com.rabka.restaurantservice.service.WorkingHoursService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

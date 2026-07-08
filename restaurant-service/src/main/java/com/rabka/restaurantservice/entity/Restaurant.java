@@ -1,8 +1,12 @@
 package com.rabka.restaurantservice.entity;
 
-import com.Rabka.rabka.entity.RestaurantBranch;
-import com.Rabka.rabka.entity.RestaurantMenu;
-import com.Rabka.rabka.entity.RestaurantStatus;
+import com.rabka.restaurantservice.entity.RestaurantBranch;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 

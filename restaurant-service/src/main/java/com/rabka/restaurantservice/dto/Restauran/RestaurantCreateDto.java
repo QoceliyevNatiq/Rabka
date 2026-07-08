@@ -1,8 +1,8 @@
-package com.Rabka.rabka.dto.Restauran;
+package com.rabka.restaurantservice.dto.Restauran;
 
-import com.Rabka.rabka.entity.RestaurantBranch;
-import com.Rabka.rabka.entity.RestaurantMenu;
-import com.Rabka.rabka.entity.RestaurantType;
+import com.rabka.restaurantservice.entity.RestaurantBranch;
+import com.rabka.restaurantservice.entity.RestaurantMenu;
+import com.rabka.restaurantservice.entity.RestaurantType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

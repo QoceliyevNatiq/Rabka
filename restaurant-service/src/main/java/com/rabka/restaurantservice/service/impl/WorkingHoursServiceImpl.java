@@ -1,15 +1,15 @@
-package com.Rabka.rabka.service.impl;
+package com.rabka.restaurantservice.service.impl;
 
-import com.Rabka.rabka.dto.WorkingHours.WorkingHoursCreateDto;
-import com.Rabka.rabka.dto.WorkingHours.WorkingHoursResponseDto;
-import com.Rabka.rabka.dto.WorkingHours.WorkingHoursUpdateDto;
-import com.Rabka.rabka.entity.RestaurantBranch;
-import com.Rabka.rabka.entity.WorkingHours;
+import com.rabka.restaurantservice.dto.WorkingHours.WorkingHoursCreateDto;
+import com.rabka.restaurantservice.dto.WorkingHours.WorkingHoursResponseDto;
+import com.rabka.restaurantservice.dto.WorkingHours.WorkingHoursUpdateDto;
+import com.rabka.restaurantservice.entity.RestaurantBranch;
+import com.rabka.restaurantservice.entity.WorkingHours;
 import com.rabka.common.exception.ResourceNotFoundException;
-import com.Rabka.rabka.mapstruct.WorkingHoursMapper;
-import com.Rabka.rabka.repo.RestaurantBranchRepository;
-import com.Rabka.rabka.repo.WorkingHoursRepository;
-import com.Rabka.rabka.service.WorkingHoursService;
+import com.rabka.restaurantservice.mapstruct.WorkingHoursMapper;
+import com.rabka.restaurantservice.repository.RestaurantBranchRepository;
+import com.rabka.restaurantservice.repository.WorkingHoursRepository;
+import com.rabka.restaurantservice.service.WorkingHoursService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
