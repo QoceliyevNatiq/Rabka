@@ -1,4 +1,5 @@
 com\rabka\foodservice\mapsturct\FoodMapperImpl.class
+com\rabka\foodservice\dto\message\PriceResponseItem.class
 com\rabka\foodservice\service\FoodService.class
 com\rabka\foodservice\service\FoodServiceImpl.class
 com\rabka\foodservice\entity\Food.class
@@ -8,7 +9,12 @@ com\rabka\foodservice\repository\MenuCategoryRepository.class
 com\rabka\foodservice\controller\FoodController.class
 com\rabka\foodservice\dto\food\FoodCreateDto.class
 com\rabka\foodservice\dto\food\FoodUpdateDto.class
+com\rabka\foodservice\dto\message\PriceResponseMessage.class
 com\rabka\foodservice\dto\MenuCategory\MenuCategoryResponseDto.class
 com\rabka\foodservice\entity\MenuCategory.class
+com\rabka\foodservice\config\RabbitMQConfig.class
 com\rabka\foodservice\repository\FoodRepository.class
+com\rabka\foodservice\dto\message\PriceRequestItem.class
+com\rabka\foodservice\dto\message\PriceRequestMessage.class
+com\rabka\foodservice\messaging\PriceRequestConsumer.class
 com\rabka\foodservice\dto\food\FoodResponseDto.class

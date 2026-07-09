@@ -5,6 +5,7 @@ C:\Users\Natiq\Downloads\rabka\user-service\src\main\java\com\rabka\userservice\
 C:\Users\Natiq\Downloads\rabka\user-service\src\main\java\com\rabka\userservice\dto\UserUpdateDto.java
 C:\Users\Natiq\Downloads\rabka\user-service\src\main\java\com\rabka\userservice\entity\User.java
 C:\Users\Natiq\Downloads\rabka\user-service\src\main\java\com\rabka\userservice\mapper\UserMapper.java
+C:\Users\Natiq\Downloads\rabka\user-service\src\main\java\com\rabka\userservice\messaging\OrderEventListener.java
 C:\Users\Natiq\Downloads\rabka\user-service\src\main\java\com\rabka\userservice\repository\UserRepository.java
 C:\Users\Natiq\Downloads\rabka\user-service\src\main\java\com\rabka\userservice\security\JwtFilter.java
 C:\Users\Natiq\Downloads\rabka\user-service\src\main\java\com\rabka\userservice\security\JwtUtil.java

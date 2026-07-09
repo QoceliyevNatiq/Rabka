@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface FoodRepository extends JpaRepository<Food, Long> {
     Page<Food> findFoodByNameContainingIgnoreCase(String foodName, Pageable pageable);
@@ -15,4 +17,5 @@ public interface FoodRepository extends JpaRepository<Food, Long> {
     Page<Food> findFoodByPriceBetween(Double min, Double max, Pageable pageable);
     Page<Food> findAllFoodIsActive(Pageable pageable);
     Food findFoodById(Long id);
+    List<Food> findByIdIn(List<Long> ids);
 }

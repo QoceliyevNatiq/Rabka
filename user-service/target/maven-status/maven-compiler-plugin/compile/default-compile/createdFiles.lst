@@ -13,6 +13,7 @@ com\rabka\userservice\controller\UserController.class
 com\rabka\userservice\security\UserDetailServiceImpl.class
 com\rabka\userservice\security\JwtUtil.class
 com\rabka\userservice\dto\RegisterDto.class
+com\rabka\userservice\messaging\OrderEventListener.class
 com\rabka\userservice\dto\UserResponseDto$UserResponseDtoBuilder.class
 com\rabka\userservice\dto\LoginDto$LoginDtoBuilder.class
 com\rabka\userservice\mapper\UserMapperImpl.class

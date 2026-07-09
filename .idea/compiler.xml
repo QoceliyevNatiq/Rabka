@@ -19,8 +19,8 @@
         <module name="rabka (1)" />
         <module name="restaurant-service" />
         <module name="api-gateway" />
-        <module name="user-service" />
         <module name="food-service" />
+        <module name="user-service" />
         <module name="common-library" />
         <module name="eureka-server" />
         <module name="rabka" />
