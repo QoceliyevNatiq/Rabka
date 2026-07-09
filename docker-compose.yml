@@ -1,9 +1,11 @@
 volumes:
   postgres-data:
+  rabbitmq_data:
 
 networks:
   rabka-network:
     driver: bridge
+
 
 services:
   postgres-db:
@@ -33,13 +35,35 @@ services:
     ports:
       - "6379:6379"
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "redis-cli","--raw", "incr", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
     restart: unless-stopped
     networks:
       - rabka-network
+
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    container_name: rabka-rabbit
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "check_port_connectivity" ]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+    networks:
+      - rabka-network
+
   api-gateway:
     build: ./api-gateway
     container_name: api-gateway
@@ -86,10 +110,16 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/rabka_food
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: admin
+      SPRING_RABBITMQ_PASSWORD: admin
     depends_on:
       eureka-server:
         condition: service_healthy
       postgres-db:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
     networks:
       - rabka-network
@@ -111,10 +141,16 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/rabka_order
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: admin
+      SPRING_RABBITMQ_PASSWORD: admin
     depends_on:
       eureka-server:
         condition: service_healthy
       postgres-db:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
     networks:
       - rabka-network
@@ -164,12 +200,18 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/rabka_user
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: admin
+      SPRING_RABBITMQ_PASSWORD: admin
     depends_on:
       eureka-server:
         condition: service_healthy
       postgres-db:
         condition: service_healthy
       redis:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
     networks:
       - rabka-network

@@ -3,6 +3,7 @@ package com.rabka.userservice.security;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import com.rabka.userservice.entity.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -28,11 +29,13 @@ public class JwtUtil {
     }
 
     public String generateToken(UserDetails userDetails) {
+        User user = (User) userDetails;
         return Jwts.builder()
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSigningKey())
                 .setSubject(userDetails.getUsername())
+                .claim("userId", user.getId())
                 .compact();
     }
 

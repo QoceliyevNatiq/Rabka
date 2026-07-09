@@ -40,15 +40,18 @@ public class JwtAuthFilter implements GlobalFilter, Ordered {
         String token = authHeader.substring(7);
         try {
             SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
-            String username = Jwts.parserBuilder()
+            var claims = Jwts.parserBuilder()
                     .setSigningKey(key)
                     .build()
                     .parseClaimsJws(token)
-                    .getBody()
-                    .getSubject();
+                    .getBody();
+
+            String username = claims.getSubject();
+            Long userId = claims.get("userId", Long.class);
 
             exchange.getRequest().mutate()
-                    .header("X-User-Id", username);
+                    .header("X-User-Id", String.valueOf(userId))
+                    .header("X-User-Email", username);
 
         } catch (Exception e) {
             log.warn("Invalid JWT token: {}", e.getMessage());
